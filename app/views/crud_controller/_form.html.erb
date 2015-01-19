@@ -1,0 +1,18 @@
+<%= simple_form_for(@object) do |f| %>
+  <% @attributes.each do |attribute, v| %>
+    <% options = {} %>
+    <% options = { as: :datetime_picker } if v.type == :datetime %>
+    <% options = { as: :date_picker } if v.type == :date %>
+    <% if attribute.end_with? '_id' %>
+      <%= f.association attribute.gsub('_id','') %>
+    <% else %>
+      <%= f.input attribute, options %>
+    <% end %>
+  <% end %>
+
+  <div class="actions">
+    <%= link_to 'Atras', polymorphic_path(@object), class: "btn btn-md btn-primary" %>
+    <%= f.submit t('save'), class: "btn btn-md btn-primary" %>
+  </div>
+
+<% end %>
