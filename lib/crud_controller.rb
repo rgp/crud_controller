@@ -1,3 +1,5 @@
+module CrudController
+end
 # class CrudController < ApplicationController
 #   before_action :set_object, only: [:show, :edit, :update, :destroy]
 #   before_action :set_attributes, only: [:index, :new, :show, :edit, :create]
