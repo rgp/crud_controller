@@ -53,7 +53,25 @@ module CrudController
     private
 
     def set_collection
-      collection = model.paginate page: params[:page]
+      if params[:search]
+        value = params[:search]
+        query = ""
+        model_columns = model.column_names.select { |c| !c.end_with?('_id')}
+        %w(id created_at updated_at deleted_at).each{|k| model_columns.delete(k)}
+        model_columns.each.with_index do |column, index|
+          if index != 0 
+            query << " OR"
+          end 
+          query << "#{column} LIKE '%#{value}%'"
+        end
+        
+        @search_param = params[:search]
+        collection = model.where(query).paginate page: params[:page], 
+                                                       per_page: 30
+      else
+        collection = model.paginate page: params[:page], per_page: 30
+      end
+      
       instance_variable_set "@#{controller_name}", collection
       @object_collection = collection
     end
