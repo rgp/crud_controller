@@ -7,6 +7,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Luis Lamadrid, Abraham Rodriguez, Ricardo Garcia"]
   s.email       = 'nick@quaran.to'
   s.files       = Dir["app/**/*", "lib/**/*", "README.md", "MIT-LICENSE"]
+  s.require_paths       = ["app", "lib"]
   s.homepage    =
     'http://rubygems.org/gems/crud_controller'
   s.license       = 'MIT'
