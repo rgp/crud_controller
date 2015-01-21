@@ -1,4 +1,7 @@
 module CrudController
+  class Railtie < ::Rails::Engine
+    config.crud_controller = CrudController
+  end
 end
 # class CrudController < ApplicationController
 #   before_action :set_object, only: [:show, :edit, :update, :destroy]
