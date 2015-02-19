@@ -1,13 +1,31 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h4><%= @klass.model_name.human(count:2).titleize %> <%= link_to "Agregar #{@klass.model_name.human}", polymorphic_path(@klass, action: :new), class: 'btn btn-md btn-success pull-right' %></h4>
+      <div class="col-md-3">
+        <h4> <%= @klass.model_name.human(count:2).titleize %> </h4>
+      </div>
+      <div class="col-md-6">
+        <%= form_tag polymorphic_path(@klass), method: 'get' do %>
+        <div class="input-group input-group-lg">
+          <%= text_field_tag 'search', nil, class: 'form-control' %>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+              <span class="fa fa-search"></span>
+            </button> </span>
+        </div><!-- /input-group -->
+        <% end %>
+      </div>
+      <div class="col-md-3">
+        <%= link_to "Agregar #{@klass.model_name.human}",
+        polymorphic_path(@klass, action: :new),
+        class: 'btn btn-md btn-success pull-right' %>
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
       <div class="table-responsive">
-        <table id="<%=@klass.name.pluralize.underscore%>_collection" class="table table-bordred table-striped">
+        <table id="<%= @klass.name.pluralize.underscore%>_collection" class="table table-bordred table-striped">
           <thead>
             <% @attributes.each do |attribute, _v| %>
             <th><%= @klass.human_attribute_name(attribute) %></th>
@@ -19,7 +37,7 @@
             <% @object_collection.each do |element| %>
             <tr>
               <% @attributes.each do |attribute, _v| %>
-                <td><%= element.send(attribute)%></td>
+              <td><%= element.send(attribute)%></td>
               <% end %>
               <td> <%= link_to edit_polymorphic_path(element), class: 'btn btn-primary btn-xs' do %> <span class="fa fa-pencil"></span> <% end %> </td>
               <td> <%= link_to polymorphic_url(element),
