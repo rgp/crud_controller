@@ -18,7 +18,7 @@ module CrudController
       @object = model.new(object_params)
       if @object.save
         flash[:success] = "#{model} guardado correctamente."
-        redirect_to "/#{controller_name}"
+        redirect_to Rails.application.routes.url_helpers.send("#{controller_name}_path")
       else
         flash[:warning] = "El #{model} no se pudo guardar."
         render :new
@@ -41,7 +41,7 @@ module CrudController
     def destroy
       if @object.destroy
         flash[:success] = "#{model} borrado correctamente."
-        redirect_to "/#{controller_name}"
+        redirect_to Rails.application.routes.url_helpers.send("#{controller_name}_path")
       else
         flash[:warning] = "#{@object.errors.messages[:base]}"
         set_collection
