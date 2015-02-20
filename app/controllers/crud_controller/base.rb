@@ -60,7 +60,7 @@ module CrudController
         %w(id created_at updated_at deleted_at).each{|k| model_columns.delete(k)}
         model_columns.each.with_index do |column, index|
           if index != 0 
-            query << " OR"
+            query << " OR "
           end 
           query << "#{column} LIKE '%#{value}%'"
         end
