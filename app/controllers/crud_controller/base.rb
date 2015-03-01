@@ -1,7 +1,8 @@
 module CrudController
   class Base < ::ApplicationController
     before_action :set_object, only: [:show, :edit, :update, :destroy]
-    before_action :set_attributes, only: [:index, :new, :show, :edit, :create]
+    before_action :set_attributes, only: [:index, :show, :new, :create, :edit,
+                                          :update]
     before_action :set_collection, only: [:index]
 
     def show
