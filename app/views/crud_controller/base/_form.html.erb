@@ -12,7 +12,7 @@
 
   <div class="actions">
     <%= link_to 'Atras', polymorphic_path(@object), class: "btn btn-md btn-primary" %>
-    <%= f.submit t('save'), class: "btn btn-md btn-primary" %>
+    <%= f.submit t('save', default: 'Save'), class: "btn btn-md btn-primary" %>
   </div>
 
 <% end %>
